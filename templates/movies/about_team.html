@@ -1,0 +1,43 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+<!------------------------------PAGE-TITLE------------------------------>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="title">
+            <span>Our Team</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text_white">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">About Our Team</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!----------------------------PAGE-TITLE-END--------------------------->
+
+
+<!-------------------------------OUR-TEAM------------------------------>
+<div class="our_team">
+    <div class="container">
+        <div class="team">
+            {% for m in members_data%}
+            <div class="team_member">
+                <div class="member_img_block">
+                    <img src="{% static m.pic_src %}" alt="photo" class="member_img_team">
+                </div>
+                <div class="team_member_info">
+                    <h2 class="member_name">{{ m.name }}</h2>
+                    <h4 class="member_info">{{ m.group }}</h4>
+                    <h4 class="member_info">{{ m.course }}</h4>
+                </div>
+            </div>
+            {% endfor%}
+        </div>
+    </div>
+</div>
+<!------------------------------OUR-TEAM-END--------------------------->
+{% endblock %}

@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }}</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="{% static 'movies/css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'movies/css/about_project.css' %} ">
+    <link rel="stylesheet" href="{% static 'movies/css/about_teams.css' %} ">
+    <link rel="stylesheet" href="{% static 'movies/css/dev_contact.css' %} ">
+
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body>
+
+	<!------------------------------HEADER-TOP------------------------------>
+	<div class="navbar navbar-expand-lg navbar-dark mt-3 mb-3">
+		<div class="container">
+			<div class="headerLogo col-2">
+				<a href="#" class="logo">Rory</a>
+			</div>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="navItemLink" href="{% url 'about_project' %}">About Project</a>
+					</li>
+					<li class="nav-item">
+						<a class="navItemLink" href="{% url 'about_team' %}">About Our Team</a>
+					</li>
+					<li class="nav-item">
+						<a class="navItemLink" href="{% url 'dev_contacts' %}">Contacts</a>
+					</li>
+				</ul>
+
+				<form class="d-flex me-4">
+					<input class="form-control me-2 headerFormInput" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-primary" type="submit">Search</button>
+				</form>
+
+				<a href="Sign.html" class="headerSign">
+					Sign in
+					<i class="fas fa-sign-in-alt"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="gradient_line"></div>
+	<!----------------------------HEADER-TOP-END--------------------------->
+
+
+	{% block content %}
+
+    {% endblock %}
+
+
+	<!---------------------------------FOOTER------------------------------>
+	<div class="gradient_line"></div>
+	<footer>
+		<div class="footer_pad">
+			<div class="container">
+				<div class="footer_lists">
+						<!----------------FOOTER_LIST_1------------------>
+					<div class="footer_list">
+						<h6 class="footer_title">Download Our App</h6>
+
+						<ul class="footer_app">
+							<li class="downl_li"><a href="#"><img src="{% static 'movies/images/downl_a.png' %}" class="downl_a"></a></li>
+							<li><a href="#"><img src="{% static 'movies/images/downl_g.png' %}" class="downl_g"></a></li>
+						</ul>
+					</div>
+						<!--------------FOOTER_LIST_1-END--------------->
+
+						<!----------------FOOTER_LIST_2------------------>
+					<div class="footer_list">
+						<h6 class="footer_title">Resources</h6>
+
+						<ul>
+							<li class="list">
+								<a href="{% url 'about_project' %}" class="list_in">About Project</a>
+							</li>
+							<li class="list">
+								<a href="{% url 'about_team' %}" class="list_in">About Our Team</a>
+							</li>
+							<li class="list">
+								<a href="{% url 'dev_contacts' %}" class="list_in">Contacts</a>
+							</li>
+						</ul>
+					</div>
+						<!--------------FOOTER_LIST_2-END--------------->
+
+						<!------------------FOOTER_LIST_3--------------->
+					<div class="footer_list">
+					</div>
+						<!--------------FOOTER_LIST_3-END--------------->
+
+						<!----------------FOOTER_LIST_4------------------>
+					<div class="footer_list">
+						<h6 class="footer_title">Contact</h6>
+
+						<ul>
+							<li class="list">
+								<a href="#" class="list_in">+7 (708) 105 88 62
+								</a>
+							</li>
+							<li class="list">
+								<a href="#" class="list_in">+7 (777) 129 57 47
+								</a>
+							</li>
+							<li class="list">
+								<a href="#" class="list_in">rory@gmail.com
+								</a>
+							</li>
+						</ul>
+
+						<ul class="footer_social">
+							<li class="social">
+								<a href="#"><img src="{% static 'movies/images/facebook.png' %}" alt="" class="facebook"></a>
+							</li>
+							<li class="social">
+								<a href="#"><img src="{% static 'movies/images/inst.png' %}" alt="" class="instagram"></a>
+							</li>
+							<li class="social">
+								<a href="#"><img src="{% static 'movies/images/vk.png' %}" alt="" class="vkontakte"></a>
+							</li>
+							<li class="social">
+								<a href="#"><img src="{% static 'movies/images/twit.png' %}" alt="" class="twitter"></a>
+							</li>
+						</ul>
+					</div>
+						<!--------------FOOTER_LIST_4-END--------------->
+				</div>
+					<!-----------------FOOTER_LISTS-END------------------>
+
+					<!-------------------FOOTER-ENDS--------------------->
+				<div class="footer_end">
+					<div class="end_content">
+						<small class="end_text">
+							© 2021 Rory. Create by Dias Kabenov & Adil Gumarov
+						</small>
+						<ul class="inline">
+							<li>
+								<a href="#"  class="end_text1">Terms of Use</a>
+							</li>
+							<li>
+								<a href="#" class="end_text1">Privacy Policy</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+					<!-----------------FOOTER-ENDS-END------------------>
+			</div>
+		</div>
+	</footer>
+	<!--------------------------------FOOTER-END--------------------------->
+
+</body>
+</html>

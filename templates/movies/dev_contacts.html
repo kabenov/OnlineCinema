@@ -1,0 +1,105 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+<!------------------------------PAGE-TITLE------------------------------>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="title">
+            <span>Contacts</span>
+        </div>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text_white">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contacts</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!----------------------------PAGE-TITLE-END--------------------------->
+
+
+<!-----------------------------INFORMATION------------------------------>
+<div class="form_info">
+    <div class="container">
+        <div class="row">
+            <form action="#" class="form">
+                <div class="row">
+                    <div class="input_form half">
+                        <input type="text" placeholder="Name" class="sign_input">
+                    </div>
+
+                    <div class="input_form half">
+                        <input type="text" placeholder="Email" class="sign_input">
+                    </div>
+                </div>
+
+                <div class="input_form">
+                    <input type="text" placeholder="Subject" class="sign_input">
+                </div>
+
+                <div class="input_form">
+                    <textarea type="text" placeholder="Type your message" class="sign_textarea"></textarea>
+                </div>
+
+                <div class="input_button">
+                    <button type="button" class="sign_button">Send</button>
+                </div>
+            </form>
+
+            <div class="info_box">
+                <h3 class="info_title">Info</h3>
+
+                <div class="section_text">
+                    Head office address: Manasa, 34/1
+                </div>
+
+                <ul class="contacts_list">
+                    <li>
+                        <a href="tel:+77081058862">+7 (777) 777 77-71</a>
+                    </li>
+                    <li>
+                        <a href="tel:+77771295747">+7 (727) 377 77-71</a>
+                    </li>
+                    <li>
+                        <a href="mailto:dias.kabenovgo60@gmail.com">Rory@gmail.com</a>
+                    </li>
+                </ul>
+
+                <ul class="contacts_social">
+                    <li class="social">
+                        <a href="#"><img src="{% static 'movies/images/facebook.png' %}" alt="" class="facebook"></a>
+                    </li>
+                    <li class="social">
+                        <a href="#"><img src="{% static 'movies/images/inst.png' %}" alt="" class="instagram"></a>
+                    </li>
+                    <li class="social">
+                        <a href="#"><img src="{% static 'movies/images/vk.png' %}" alt="" class="vkontakte"></a>
+                    </li>
+                    <li class="social">
+                        <a href="#"><img src="{% static 'movies/images/twit.png' %}" alt="" class="twitter"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="team d-flex justify-content-between mt-4">
+            {%  for m in members_data %}
+            <div class="team_member">
+                <div class="member_img_block d-flex align-content-center">
+                    <img src="{% static m.pic_src %}" alt="photo" class="member_img">
+                </div>
+                <div class="team_member_info">
+                    <h1 class="member_position">{{ m.position }}</h1>
+                    <h2 class="member_name">{{ m.name }}</h2>
+                    <h4 class="member_info"><a href="tel:{{ m.ph_num_href }}">{{ m.ph_num }}</a></h4>
+                    <h4 class="member_info">Office hours: <br>{{ m.off_hours }}</h4>
+                </div>
+            </div>
+            {%  endfor %}
+        </div>
+    </div>
+</div>
+<!---------------------------INFORMATION-END--------------------------->
+{% endblock %}
