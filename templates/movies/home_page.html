@@ -1,0 +1,278 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-inner">
+		<div class="carousel-item active" data-bs-interval="6000">
+			<img src="{% static 'Img/slider/Slider1.jfif' %}" class="d-block w-100" alt="...">
+		</div>
+		<div class="carousel-item" data-bs-interval="6000">
+			<img src="{% static 'Img/slider/Slider2.jfif' %}" class="d-block w-100" alt="...">
+		</div>
+		<div class="carousel-item"  data-bs-interval="6000">
+			<img src="{% static 'Img/slider/Slider3.jfif' %}" class="d-block w-100" alt="...">
+		</div>
+		<div class="carousel-item"  data-bs-interval="6000">
+			<img src="{% static 'Img/slider/Slider4.jfif' %}" class="d-block w-100" alt="...">
+		</div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>
+
+<!-------------------------------END-INTRO------------------------------->
+
+
+<!--------------------------------CONTENT-------------------------------->
+<div class="content">
+	<div class="gradient_line"></div><!-----GRADIENT__LINE----->
+	<br>
+	<br>
+
+	<!------------------------------FILMS------------------------------>
+	<div class="container">
+
+		<!--------------------------TITLE-------------------------->
+		<h2 class="content_title">Recommended</h2>
+		<br>
+
+		<!------------------------FILM-ROW_1------------------------>
+		<div class="Films-row">
+
+            <!-----------------FILMS----------------->
+            {% for movie in movie_list %}
+
+			<div class="film-1">
+				<!-----IMG-FILM----->
+				<a href="#" class="Films-img">
+					<img src="{{ movie.poster }}" alt="Film-1" class="img-1">
+				</a>
+
+				<!-----TEXT-FILM----->
+				<div class="text_1">
+					<h2 class="name-film">{{ movie.title }}</h2>
+
+						<!-----GANRE----->
+					<h6 class="ganre">
+					    <a href="#" style="cursor: none">{{ movie.genres }}</a>
+					</h6>
+
+						<!-----RATING----->
+					<div class="rating">
+						<ul class="card_list">
+							<li class="li">{{ movie.rating }}</li>
+							<li class="li">HD</li>
+							<li class="li">{{ movie.agerestriction }}+</li>
+						</ul>
+					</div>
+
+					<a href="#" class="mybtn filmBtnDetails">Details</a>
+				</div>
+			</div>
+
+            {% endfor %}
+            <!---------------FILMS_END---------------->
+
+		</div>
+		<!----------------------FILM-ROW_1-END---------------------->
+
+
+		<!--------------------------TITLE-------------------------->
+		<h2 class="content_title">Soon on screen</h2>
+		<br>
+
+		<!------------------------FILM-ROW_2------------------------>
+		<div class="Films-row">
+
+			<!-----------------FILMS----------------->
+            {% for movie in movie_list %}
+
+			<div class="film-1">
+				<!-----IMG-FILM----->
+				<a href="#" class="Films-img">
+					<img src="{{ movie.poster }}" alt="Film-1" class="img-1">
+				</a>
+
+				<!-----TEXT-FILM----->
+				<div class="text_1">
+					<h2 class="name-film">{{ movie.title }}</h2>
+
+						<!-----GANRE----->
+					<h6 class="ganre">
+					    <a href="#" style="cursor: none">{{ movie.genres }}</a>
+					</h6>
+
+						<!-----RATING----->
+					<div class="rating">
+						<ul class="card_list">
+							<li class="li">{{ movie.rating }}</li>
+							<li class="li">HD</li>
+							<li class="li">{{ movie.agerestriction }}+</li>
+						</ul>
+					</div>
+
+					<a href="#" class="mybtn filmBtnDetails">Details</a>
+				</div>
+			</div>
+
+            {% endfor %}
+            <!---------------FILMS_END---------------->
+		</div>
+		<!----------------------FILM-ROW_2-END---------------------->
+
+
+		<!------------------------SELECT-PLAN------------------------>
+{#		<h2 class="content_title">Select Your Plan</h2>#}
+{#		<br>#}
+
+		<div class="plan-row">
+{#			<div class="plan">#}
+{#				<h3 class="plan_title">Regular</h3>#}
+{##}
+{#				<ul class="plan_list">#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="uncheck">#}
+{#						<i class="fas fa-times"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="uncheck">#}
+{#						<i class="fas fa-times"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#				</ul>#}
+{##}
+{#				<div class="plan_price">#}
+{#					$14.99#}
+{#					<span>/month</span>#}
+{#				</div>#}
+{##}
+{#				<button class="mybtn planBtnSelect">Select plan</button>#}
+{#			</div>#}
+{##}
+{##}
+{#			<div class="plan profitable">#}
+{#				<h3 class="plan_title">Premium</h3>#}
+{##}
+{#				<ul class="plan_list">#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="uncheck">#}
+{#						<i class="fas fa-times"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#				</ul>#}
+{##}
+{#				<div class="plan_price">#}
+{#					$24.99#}
+{#					<span>/month</span>#}
+{#				</div>#}
+{##}
+{#				<button class="mybtn planBtnSelect">Select plan</button>#}
+{#			</div>#}
+{##}
+{##}
+{#			<div class="plan">#}
+{#				<h3 class="plan_title">Premuim + gold</h3>#}
+{##}
+{#				<ul class="plan_list">#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#					<li class="check">#}
+{#						<i class="fas fa-check"></i>#}
+{#						Lorem#}
+{#					</li>#}
+{#				</ul>#}
+{##}
+{#				<div class="plan_price">#}
+{#					$34.99#}
+{#					<span>/month</span>#}
+{#				</div>#}
+{##}
+{#				<button class="mybtn planBtnSelect">Select plan</button>#}
+{#			</div>#}
+		</div>
+		<!----------------------SELECT-PLAN-END---------------------->
+
+
+		<!--------------------------TITLE-------------------------->
+		<h2 class="content_title">For kids</h2>
+		<br>
+		
+		<!------------------------FILM-ROW_3------------------------>
+		<div class="Films-row">
+
+			<!-----------------FILMS----------------->
+            {% for movie in movie_list %}
+
+			<div class="film-1">
+				<!-----IMG-FILM----->
+				<a href="#" class="Films-img">
+					<img src="{{ movie.poster }}" alt="Film-1" class="img-1">
+				</a>
+
+				<!-----TEXT-FILM----->
+				<div class="text_1">
+					<h2 class="name-film">{{ movie.title }}</h2>
+
+						<!-----GANRE----->
+					<h6 class="ganre">
+					    <a href="#" style="cursor: none">{{ movie.genres }}</a>
+					</h6>
+
+						<!-----RATING----->
+					<div class="rating">
+						<ul class="card_list">
+							<li class="li">{{ movie.rating }}</li>
+							<li class="li">HD</li>
+							<li class="li">{{ movie.agerestriction }}+</li>
+						</ul>
+					</div>
+
+					<a href="#" class="mybtn filmBtnDetails">Details</a>
+				</div>
+			</div>
+
+            {% endfor %}
+            <!---------------FILMS_END---------------->
+		</div>
+		<!----------------------FILM-ROW_3-END---------------------->
+	</div>
+</div>
+<!------------------------------CONTENT-END----------------------------->
+
+{% endblock %}
