@@ -1,0 +1,9 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h1>{{ movie.title }}</h1>
+    <img src="{{ movie.poster.url }}" alt="movie_poster">
+
+{% endblock %}

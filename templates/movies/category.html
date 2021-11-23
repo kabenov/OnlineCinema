@@ -3,46 +3,11 @@
 
 {% block content %}
 
-<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-	<div class="carousel-inner">
-		<div class="carousel-item active" data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider1.jfif' %}" class="d-block w-100" alt="...">
-		</div>
-		<div class="carousel-item" data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider2.jfif' %}" class="d-block w-100" alt="...">
-		</div>
-		<div class="carousel-item"  data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider3.jfif' %}" class="d-block w-100" alt="...">
-		</div>
-		<div class="carousel-item"  data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider4.jfif' %}" class="d-block w-100" alt="...">
-		</div>
-	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-	</button>
-</div>
-
-<!-------------------------------END-INTRO------------------------------->
-
-
-<!--------------------------------CONTENT-------------------------------->
-<div class="content">
-	<div class="gradient_line"></div><!-----GRADIENT__LINE----->
-	<br>
-	<br>
-
-	<!------------------------------FILMS------------------------------>
-	<div class="container">
+    <div class="container">
 
         {% for cat in category_list %}
 		<!--------------------------TITLE-------------------------->
-        <a href="{{ cat.get_absolute_url }}"><h2 class="content_title">{{ cat.name }}</h2></a>
+        <a href="{% url 'category' cat.url %}"><h2 class="content_title">{{ cat.name }}</h2></a>
 		<br>
 
 		<div class="Films-row">
@@ -51,7 +16,7 @@
             {% for movie in movie_list %}
                 {% if movie.category.name == cat.name %}
 			<div class="film-1">
-				<a href="{{ movie.get_absolute_url }}" class="Films-img">
+				<a href="{{ movie.url }}" class="Films-img">
 					<img src="{{ movie.poster.url }}" alt="Film-poster" class="img-1">
 				</a>
 
@@ -72,7 +37,7 @@
 						</ul>
 					</div>
 
-					<a href="{{ movie.get_absolute_url }}" class="mybtn filmBtnDetails">Details</a>
+					<a href="{% url 'movie_detail' movie.url %}" class="mybtn filmBtnDetails">Details</a>
 				</div>
 			</div>
                 {% endif %}
@@ -183,7 +148,5 @@
 		</div>
 		<!----------------------SELECT-PLAN-END---------------------->
 	</div>
-</div>
-<!------------------------------CONTENT-END----------------------------->
 
 {% endblock %}

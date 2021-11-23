@@ -2,6 +2,8 @@ from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
+
 
 class Genre(models.Model):
     name = models.CharField("Genre", max_length=150)
@@ -26,6 +28,21 @@ class Actor(models.Model):
         verbose_name_plural = "Actors"
 
 
+class Category(models.Model):
+    name = models.CharField("Category", max_length=150)
+    url = models.SlugField(max_length=130, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'cat_pk': self.id})
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+
 class Movie(models.Model):
     title = models.CharField("Title", max_length=100)
     description = models.TextField
@@ -36,10 +53,14 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre, verbose_name="genre")
     rating = models.FloatField("Rating", default=0)
     agerestriction = models.IntegerField("agerestriction", default=16)
+    category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.SET_NULL, null=True)
     url = models.SlugField(max_length=130, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('movie_detail', kwargs={'movie_slug': self.url})
 
     class Meta:
         verbose_name = "Movie"
@@ -47,12 +68,10 @@ class Movie(models.Model):
 
 
 class Roles(models.Model):
-    """Roles"""
     name = models.CharField("name", max_length=150)
 
 
 class Users(models.Model):
-    """Users"""
     name = models.CharField("name", max_length=100)
     surname = models.CharField("surname", max_length=100)
     email = models.EmailField()
