@@ -13,21 +13,20 @@
 	<div class="full_bg">
 		<div class="container">
 			<div class="sign_box">
-				<form action="{% url 'sign_in' %}" method="post" class="form">
+				<form action="" method="POST" class="form">
                     {% csrf_token %}
 					<a href="{% url 'home' %}" class="logo">Rory</a>
 
+                    {% for message in messages %}
+                        <p class="alert-success">{{ message }}</p>
+                    {% endfor %}
+
 					<div class="input_form">
-						<input type="email" placeholder="Email" name="email" class="sign_input" required>
+						<input type="text" placeholder="Username" name="username" class="sign_input" required>
 					</div>
 
 					<div class="input_form">
 						<input type="password" placeholder="Password" name="password" class="sign_input" required>
-					</div>
-
-					<div class="input_form input_form_check">
-						<input type="checkbox" checked="checked" class="check">
-						<label class="remember">Remember Me</label>
 					</div>
 
 					<button type="submit" class="sign_button" >Sign In</button>

@@ -5,18 +5,15 @@
 
 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-inner">
-		<div class="carousel-item active" data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider1.jfif' %}" class="d-block w-100" alt="...">
+        {% for poster in posters.all %}
+            {% with forloop.counter0 as i %}
+		<div class="carousel-item {% if i is 0 %}active{% endif %}" data-bs-interval="6000">
+            <a href="{{ poster.movie.get_absolute_url }}">
+                <img src="{{ poster.img.url }}" class="d-block w-100" alt="...">
+            </a>
 		</div>
-		<div class="carousel-item" data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider2.jfif' %}" class="d-block w-100" alt="...">
-		</div>
-		<div class="carousel-item"  data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider3.jfif' %}" class="d-block w-100" alt="...">
-		</div>
-		<div class="carousel-item"  data-bs-interval="6000">
-			<img src="{% static 'Img/slider/Slider4.jfif' %}" class="d-block w-100" alt="...">
-		</div>
+            {% endwith %}
+        {% endfor %}
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -39,49 +36,38 @@
 
 	<!------------------------------FILMS------------------------------>
 	<div class="container">
-
-        {% for cat in category_list %}
-		<!--------------------------TITLE-------------------------->
-        <a href="{{ cat.get_absolute_url }}"><h2 class="content_title">{{ cat.name }}</h2></a>
-		<br>
-
 		<div class="Films-row">
-
-            <!-----------------FILMS----------------->
             {% for movie in movie_list %}
                 {% if movie.category.name == cat.name %}
-			<div class="film-1">
-				<a href="{{ movie.get_absolute_url }}" class="Films-img">
-					<img src="{{ movie.poster.url }}" alt="Film-poster" class="img-1">
-				</a>
+                    <div class="film-1">
+                        <a href="{{ movie.get_absolute_url }}" class="Films-img">
+                            <img src="{{ movie.poster.url }}" alt="Film-poster" class="img-1">
+                        </a>
 
-				<div class="text_1">
-					<h2 class="name-film">{{ movie.title }}</h2>
+                        <div class="text_1">
+                            <h2 class="name-film">{{ movie.title }}</h2>
 
-					<h6 class="ganre">
-                        {% for genre in movie.genres.all %}
-					    <a href="#" style="cursor: none">{{ genre }}</a>
-                        {% endfor %}
-					</h6>
+                            <h6 class="ganre">
+                                {% for genre in movie.genres.all %}
+                                <a href="#" style="cursor: none">{{ genre }}</a>
+                                {% endfor %}
+                            </h6>
 
-					<div class="rating">
-						<ul class="card_list">
-							<li class="li">{{ movie.rating }}</li>
-							<li class="li">HD</li>
-							<li class="li">{{ movie.agerestriction }}+</li>
-						</ul>
-					</div>
+                            <div class="rating">
+                                <ul class="card_list">
+                                    <li class="li">{{ movie.rating }}</li>
+                                    <li class="li">HD</li>
+                                    <li class="li">{{ movie.agerestriction }}+</li>
+                                </ul>
+                            </div>
 
-					<a href="{{ movie.get_absolute_url }}" class="mybtn filmBtnDetails">Details</a>
-				</div>
-			</div>
+                            <a href="{{ movie.get_absolute_url }}" class="mybtn filmBtnDetails">Details</a>
+                        </div>
+                    </div>
                 {% endif %}
-
             {% endfor %}
-            <!---------------FILMS_END---------------->
-
-		</div>
-        {% endfor %}
+        </div>
+    <!---------------------------FILMS-END----------------------------->
 
 
 		<!------------------------SELECT-PLAN------------------------>

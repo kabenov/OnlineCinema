@@ -276,12 +276,14 @@ body{
 .Films-row{
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: start;
+	flex-wrap: wrap;
 }
 
 .film-1{
 	width: 13%;
 	margin-bottom: 50px;
+	margin-right: 16px;
 }
 
 .img-1{

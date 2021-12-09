@@ -65,6 +65,23 @@ body{
   border-color: #2f80ed;
 }
 
+.form-control{
+	width: 100%;
+	height: 44px;
+	color: #ffffff;
+	position: relative;
+	border: 1px solid transparent;
+	border-radius: 16px;
+	font-size: 14px;
+	padding: 0 20px;
+	background-color: #151f30;
+}
+
+.form-control:focus {
+  background-color: #151f30;
+  border-color: #2f80ed;
+}
+
 .input_form_check{
 	width: 100%;
 	text-align: left;

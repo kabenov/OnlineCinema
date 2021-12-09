@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{% static 'movies/css/about_project.css' %} ">
     <link rel="stylesheet" href="{% static 'movies/css/about_teams.css' %} ">
     <link rel="stylesheet" href="{% static 'movies/css/dev_contact.css' %} ">
+    <link rel="stylesheet" href="{% static 'movies/css/movie_detail.css' %} ">
 
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
@@ -43,15 +44,15 @@
 					</li>
 				</ul>
 
-				<form class="d-flex me-4">
-					<input class="form-control me-2 headerFormInput" type="search" placeholder="Search" aria-label="Search">
+				<form action="{% url 'search' %}" method="get" class="d-flex me-4">
+					<input class="form-control me-2 headerFormInput" type="search" name="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-primary" type="submit">Search</button>
 				</form>
 
-                {% if request.User.is_authenticated %}
-
-                    <a href="#" class="headerSign">
-                        Hello User
+                {% if user.is_authenticated %}
+                    <h6>{{ user.username }}  </h6>
+                    <a href="{% url 'log_out' %}" class="headerSign">
+                        Log out
                         <i class="fas fa-sign-in-alt"></i>
                     </a>
 

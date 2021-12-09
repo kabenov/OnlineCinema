@@ -13,28 +13,26 @@
 	<div class="full_bg">
 		<div class="container">
 			<div class="sign_box" style="padding: 0">
-				<form action="{% url 'sign_up' %}" method="post" class="form">
+				<form action="" method="post" class="form">
                     {% csrf_token %}
 					<a href="{% url 'home' %}" class="logo">Rory</a>
 
-                    <div class="input_form">
-						<input type="text" placeholder="Name" name="name" class="sign_input" required>
-					</div>
+                    {{ form.errors }}
 
                     <div class="input_form">
-						<input type="text" placeholder="Surname" name="surname" class="sign_input">
+						{{ form.username }}
 					</div>
 
 					<div class="input_form">
-						<input type="email" placeholder="Email" name="e-mail" class="sign_input" required>
+                        {{ form.email }}
 					</div>
 
 					<div class="input_form">
-						<input type="password" placeholder="Password" name="password" class="sign_input" required>
+						{{ form.password1 }}
 					</div>
 
                     <div class="input_form">
-						<input type="password" placeholder="Re-Password" name="re-password" class="sign_input" required>
+						{{ form.password2 }}
 					</div>
 
 					<button type="submit" class="sign_button" >Sign Up</button>
@@ -61,6 +59,5 @@
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

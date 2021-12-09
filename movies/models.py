@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 from django.urls import reverse
 
@@ -28,24 +27,9 @@ class Actor(models.Model):
         verbose_name_plural = "Actors"
 
 
-class Category(models.Model):
-    name = models.CharField("Category", max_length=150)
-    url = models.SlugField(max_length=130, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('category_detail', kwargs={'cat_pk': self.id})
-
-    class Meta:
-        verbose_name = "Category"
-        verbose_name_plural = "Categories"
-
-
 class Movie(models.Model):
     title = models.CharField("Title", max_length=100)
-    description = models.TextField
+    description = models.TextField("Description", max_length=250, default="Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda voluptatem similique sed consequatur dolorem ad.")
     poster = models.ImageField("Poster", upload_to='movie_posters/')
     year = models.PositiveSmallIntegerField("Year", default=2021)
     country = models.CharField("Country", max_length=30)
@@ -53,7 +37,8 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre, verbose_name="genre")
     rating = models.FloatField("Rating", default=0)
     agerestriction = models.IntegerField("agerestriction", default=16)
-    category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.SET_NULL, null=True)
+    trailer_link = models.CharField("Trailer", max_length=1000, default="https://www.youtube.com/embed/6z4tdTbIjJA")
+    film_link = models.CharField("Film", max_length=1000, default="https://www.youtube.com/embed/6z4tdTbIjJA")
     url = models.SlugField(max_length=130, unique=True)
 
     def __str__(self):
@@ -77,3 +62,13 @@ class Users(models.Model):
     email = models.EmailField()
     password = models.CharField("password", max_length=10)
     role = models.ForeignKey(Roles, verbose_name="Role", on_delete=models.CASCADE)
+
+
+class Posters(models.Model):
+    img = models.ImageField("Poster", upload_to='carousel_posters/')
+    movie = models.ForeignKey(Movie, verbose_name="movie", on_delete=models.CASCADE)
+    switch = models.BooleanField(default=True, verbose_name="switch")
+
+    class Meta:
+        verbose_name = "Poster"
+        verbose_name_plural = "Posters"

@@ -1,0 +1,136 @@
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {margin: 0;}
+
+p {
+	margin: 0 0 10px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+input, textarea, select {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    appearance: none;
+    box-shadow: none;
+    transition: 0.5s ease;
+    transition-property: color, border-color;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
+a{
+	transition: 0.5s ease;
+	transition-property: color, background-color, border-color;
+	text-decoration: none;
+	background-color: transparent;
+	color: #0d6efd;
+}
+
+a:hover{
+	color: #0d6efd;
+}
+
+button {
+    padding: 0;
+    border: none;
+    transition: 0.5s ease;
+    transition-property: color, background-color, border-color;
+    cursor: pointer;
+}
+
+body::-webkit-scrollbar {
+  width: 16px;
+}
+body::-webkit-scrollbar-track {
+  background: #151f30;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #2f80ed;
+  outline: 1px solid #151f30;
+}
+
+body{
+	font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    background-color: #131720; /#0a132a/
+    color: #ffffff;
+    margin: 0;
+}
+
+/* CSS */
+
+.film_pic {
+    width: auto;
+    position: relative;
+}
+
+.film_pic_param {
+    width: 100%;
+    height: auto;
+    /* background-image: linear-gradient(blue, red); */
+}
+
+.linear_opacity{
+    width: 1520px;
+    height: 462px;
+    background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2));
+    position: absolute;
+    top: 0;
+}
+
+.film_pic_text {
+    position: absolute;
+    top: 40%;
+    left: 5%;
+
+}
+
+.play_icon {
+    color: #ffffff;
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.black {
+    color: black;
+}
+
+.film_statistic{
+    flex-wrap: wrap;
+    width: 60%;
+}
+
+.film_statistic li {
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.film_short_descrip{
+    width: 43%;
+}
+
+.myModal{
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 730px;
+        margin: 1.75rem auto;
+    }
+}

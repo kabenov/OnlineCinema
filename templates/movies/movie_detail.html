@@ -3,7 +3,44 @@
 
 {% block content %}
 
-    <h1>{{ movie.title }}</h1>
-    <img src="{{ movie.poster.url }}" alt="movie_poster">
+        <div class="film_pic mb-5">
+            <img src="{{ poster.img.url }}" alt="foto" class="film_pic_param">
+            <div class="linear_opacity"></div>
+            <div class="film_pic_text">
+                <div class="d-flex">
+                    <!-- <i class="fas fa-play-circle play_icon text-light "> Trailer </i> -->
+                    <a class="fas fa-play-circle play_icon" data-bs-toggle="modal" data-bs-target="#exampleModal"> Trailer </a>
+                </div>
+
+
+                <h2 class="font-weight-bold black text-light">{{ movie.title }}</h2>
+
+                <div class="film_statistic d-flex mt-2 text-light">
+                    {% for genre in movie.genres.all %}
+					    <li>{{ genre }}</li>
+                    {% endfor %}
+                    <li>{{ movie.year }}</li>
+                    <li>{{ movie.rating }}</li>
+                    <li>{{ movie.agerestriction }}+</li>
+                </div>
+
+                <div class="film_short_descrip text-light mt-2">
+                    {{ movie.description }}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container pb-5">
+            <iframe width="720" height="405" src="{{ movie.film_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade myModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <iframe width="720" height="405" src="{{ movie.trailer_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
 
 {% endblock %}
