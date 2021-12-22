@@ -1,0 +1,161 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container admin-title">
+
+    {% if data == 'actor' %}
+    <form action="{% url 'update' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{ actor.id }}" name="id">
+        <div class="input_form">
+            <label>Name:
+                <input type="text" placeholder="Name" name="name" class="sign_input" value="{{ actor.name }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label>Age:
+                <input type="number" placeholder="Age" name="age" class="sign_input" value="{{ actor.age }}" required>
+            </label>
+        </div>
+        <button type="submit" class="sign_button"  name="updateActor">Update</button>
+    </form>
+    {% endif %}
+
+    {% if data == 'genre' %}
+    <form action="{% url 'update' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{ genre.id }}" name="id">
+        <div class="input_form">
+            <label>Genre:
+                <input type="text" placeholder="Name" name="name" class="sign_input" value="{{ genre.name }}" required>
+            </label>
+        </div>
+        <button type="submit" class="sign_button"  name="updateGenre">Update</button>
+    </form>
+    {% endif %}
+
+    {% if data == 'movie' %}
+    <form action="{% url 'update' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="{{ movie.id }}" name="id">
+        <div class="input_form">
+            <label class="w-100">Name:
+                <input type="text" placeholder="Title" name="title" class="sign_input" value="{{ movie.title }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label class="w-100">Description:
+                <input type="text" placeholder="Description" name="description" class="sign_input" value="{{ movie.description }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label class="w-100">Year:
+                <input type="number" placeholder="Year" name="year" class="sign_input" value="{{ movie.year }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label class="w-100">Country:
+                <input type="text" placeholder="Country" name="country" class="sign_input" value="{{ movie.country }}" required>
+            </label>
+        </div>
+        <div class="help">Hold down “Control”, or “Command” on a Mac, to select more than one.</div>
+            <div class="d-flex justify-content-around w-auto">
+                <div class="input_form">
+                <label>Actors: </label>
+                <select name="actor" class="" required multiple>
+                    {% if not movie.actors.all %}
+                        {% for actor in actors_list %}
+                            <option value="{{ actor.id }}">{{ actor.name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for actor, is_select in selected_actors %}
+                            <option value="{{ actor.id }}" {% if is_select %} selected {% endif %} >{{ actor.name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="input_form">
+               <label>Genre: </label>
+                <select name="genre" class=" " required multiple>
+                    {% if not movie.actors.all %}
+                        {% for genre in genres_list %}
+                            <option value="{{ genre.id }}">{{ genre.name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for genre, is_select in selected_genres %}
+                            <option value="{{ genre.id }}" {% if is_select %} selected {% endif %}>{{ genre.name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+
+        <div class="input_form">
+            <label class="w-100">Rating:
+                <input type="number" placeholder="Rating" name="rating" class="sign_input" value="{{ movie.rating }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label class="w-100">Age restriction:
+                <input type="number" placeholder="Age restriction" name="agerestriction" class="sign_input" value="{{ movie.agerestriction }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label class="w-100">URL:
+                <input type="text" placeholder="Url" name="url" class="sign_input" value="{{ movie.url }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label style="margin-right: 5px">Poster: </label>
+            <div>
+                <input type="file" name="poster" required>
+                <p>Currently:<a href=""> {{ movie.poster.url }}</a></p>
+            </div>
+        </div>
+        <div class="input_form">
+            <label class="w-100">Film link:
+                <input type="text" placeholder="Film link" name="film_link" class="sign_input" value="{{ movie.film_link }}" required>
+            </label>
+        </div>
+        <div class="input_form">
+            <label class="w-100">Trailer link:
+                <input type="text" placeholder="Trailer link" name="trailer_link" class="sign_input" value="{{ movie.trailer_link }}" required>
+            </label>
+        </div>
+        <button type="submit" class="sign_button"  name="updateMovie">Update</button>
+    </form>
+    {% endif %}
+
+    {% if data == 'poster' %}
+    <form action="{% url 'update' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{ poster.id }}" name="id">
+        <div class="input_form">
+            <input type="text" placeholder="Name" name="name" class="sign_input" value="{{ poster.name }}" required>
+        </div>
+
+        <div class="input_form">
+            <label for="id_movie_id">Select Movie: </label>
+            <select name="movie_id" id="id_movie_id" required>
+                {% for movie in movies_list %}
+                    <option value="{{ movie.id }}" {% if movie.id == poster.movie_id %} selected {% endif %}>{{ movie.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input_form">
+            <input type="file" placeholder="Poster" name="postr" class="sign_input" required>
+        </div>
+
+        <div class="input_form">
+            <input type="checkbox" name="switch" id="id_switch" style="appearance: auto" {% if poster.switch %} checked {% endif %}>
+            <label for="id_switch">Switch</label>
+        </div>
+
+        <button type="submit" class="sign_button"  name="updatePoster">Update</button>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}

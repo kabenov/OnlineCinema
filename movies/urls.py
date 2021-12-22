@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.urls import path
 from .views import *
 
@@ -11,6 +12,11 @@ urlpatterns = [
     path('sign_in/', loginPage, name='sign_in'),
     path('log_out/', logoutPage, name='log_out'),
     path('search/', search, name='search'),
+    path('admin_panel/', admin_panel, name='admin_panel'),
+    path('create/', create, name='create'),
+    path('edit/', edit, name='edit'),
+    path('update/', update, name='update'),
+    path('delete/', delete, name='delete'),
     path('<slug:movie_slug>/', MovieDetailView.as_view(), name='movie_detail'),
 ]
 

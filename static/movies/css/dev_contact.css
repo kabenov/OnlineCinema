@@ -47,6 +47,14 @@
     margin-bottom: 20px;
 }
 
+.admin_select_height {
+	height: 200px;
+}
+
+.help {
+	padding-left: 12rem;
+}
+
 .half{
 	width: 50%;
 }
@@ -173,7 +181,7 @@ button {
 
 
 .team_member{
-	width: 45%;
+	width: 560px;
 	display: flex;
 	border-radius: 16px;
 	background-color: #151f30;

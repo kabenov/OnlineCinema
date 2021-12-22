@@ -1,0 +1,443 @@
+{% extends 'movies/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+
+    <h3 class="admin-title">Admin CRUD Panel</h3>
+
+    {% for message in messages %}
+        <p class="alert-success">{{ message }}</p>
+    {% endfor %}
+
+
+    <!--------------------------------- ACTORS --------------------------------->
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseActors" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Actors
+        </a>
+    </p>
+    <div class="collapse" id="collapseActors">
+        <div class="card card-body admin-table-bg">
+            <button type="button" class="btn btn-primary margin-bottom-5" data-bs-toggle="modal" data-bs-target="#CreateActorModal">
+                Create Actor
+            </button>
+
+            <table class="table table-bordered admin-table-border text-white">
+                <thead class="">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="text-white">
+                    {% for actor in actors_list %}
+                    <tr>
+                        <td>{{ actor.id }}</td>
+                        <td>{{ actor.name }}</td>
+                        <td>{{ actor.age }}</td>
+                        <td class="d-flex">
+                            <form action="{% url 'edit' %}" method="POST" style="margin-right: 8px">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ actor.id }}" name="id">
+                                <button type="submit" class="btn btn-sm btn-warning" name="editActor">
+                                    Edit
+                                </button>
+                            </form>
+
+                            <form action="{% url 'delete' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ actor.id }}" name="id">
+                                <button type="submit" class="btn btn-sm btn-danger" name="deleteActor">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!--------------------------------- GENRES --------------------------------->
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseGenres" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Genres
+        </a>
+    </p>
+    <div class="collapse" id="collapseGenres">
+        <div class="card card-body admin-table-bg">
+            <button type="button" class="btn btn-primary margin-bottom-5" data-bs-toggle="modal" data-bs-target="#CreateGenreModal">
+                Create Genre
+            </button>
+
+            <table class="table table-bordered admin-table-border text-white">
+                <thead class="">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for genre in genres_list %}
+                    <tr>
+                        <td>{{ genre.id }}</td>
+                        <td>{{ genre.name }}</td>
+                        <td class="d-flex">
+                            <form action="{% url 'edit' %}" method="POST" style="margin-right: 8px">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ genre.id }}" name="id">
+                                <button type="submit" class="btn btn-sm btn-warning" name="editGenre">
+                                    Edit
+                                </button>
+                            </form>
+
+                            <form action="{% url 'delete' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ genre.id }}" name="id">
+                                <button type="submit" class="btn btn-sm btn-danger" name="deleteGenre">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!--------------------------------- MOVIES --------------------------------->
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseMovies" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Movies
+        </a>
+    </p>
+    <div class="collapse" id="collapseMovies">
+        <div class="card card-body admin-table-bg">
+            <button type="button" class="btn btn-primary margin-bottom-5" data-bs-toggle="modal" data-bs-target="#CreateMovieModal">
+                Create Movie
+            </button>
+
+            <table class="table table-bordered admin-table-border text-white">
+                <thead class="">
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th style="width: 30%">Description</th>
+                        <th>Year</th>
+                        <th>Country</th>
+                        <th>Rating</th>
+                        <th>Actors</th>
+                        <th>Genres</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in movies_list %}
+                    <tr>
+                        <td>{{ movie.id }}</td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.description }}</td>
+                        <td>{{ movie.year }}</td>
+                        <td>{{ movie.country }}</td>
+                        <td>{{ movie.rating }}</td>
+                        <td>
+                            {% for actor in movie.actors.all %}
+                                <h5>{{ actor }}</h5>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for genre in movie.genres.all %}
+                                <h5>{{ genre }}</h5>
+                            {% endfor %}
+                        </td>
+                        <td class="d-flex">
+                            <form action="{% url 'edit' %}" method="POST" style="margin-right: 8px">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ movie.id }}" name="id">
+                                <button type="submit" class="btn btn-sm btn-warning" name="editMovie">
+                                    Edit
+                                </button>
+                            </form>
+
+                            <form action="{% url 'delete' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ movie.id }}" name="id">
+                                <button type="submit" class="btn btn-sm btn-danger" name="deleteMovie">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!--------------------------------- POSTERS --------------------------------->
+
+{#    <p>#}
+{#        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsePosters" role="button" aria-expanded="false" aria-controls="collapseExample">#}
+{#            Posters#}
+{#        </a>#}
+{#    </p>#}
+{#    <div class="collapse" id="collapsePosters">#}
+{#        <div class="card card-body admin-table-bg">#}
+{#            <button type="button" class="btn btn-primary margin-bottom-5" data-bs-toggle="modal" data-bs-target="#CreatePostersModal">#}
+{#                Create Poster#}
+{#            </button>#}
+{##}
+{#            <table class="table table-bordered admin-table-border text-white">#}
+{#                <thead class="">#}
+{#                    <tr>#}
+{#                        <th>Id</th>#}
+{#                        <th>Name</th>#}
+{#                        <th>Switch</th>#}
+{#                        <th>Action</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    {% for poster in posters_list %}#}
+{#                    <tr>#}
+{#                        <td>{{ poster.id }}</td>#}
+{#                        <td>{{ poster.name }}</td>#}
+{#                        <td>{{ poster.switch }}</td>#}
+{#                        <td class="d-flex">#}
+{#                            <form action="{% url 'edit' %}" method="POST" style="margin-right: 8px">#}
+{#                                {% csrf_token %}#}
+{#                                <input type="hidden" value="{{ poster.id }}" name="id">#}
+{#                                <button type="submit" class="btn btn-sm btn-warning" name="editPoster">#}
+{#                                    Edit#}
+{#                                </button>#}
+{#                            </form>#}
+{##}
+{#                            <form action="{% url 'delete' %}" method="POST">#}
+{#                                {% csrf_token %}#}
+{#                                <input type="hidden" value="{{ poster.id }}" name="id">#}
+{#                                <button type="submit" class="btn btn-sm btn-danger" name="deletePoster">#}
+{#                                    Delete#}
+{#                                </button>#}
+{#                            </form>#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+{#        </div>#}
+{#    </div>#}
+
+
+
+</div>
+
+
+<!------------------------------------------- MODALS ------------------------------------------->
+
+
+    <!-- Create Actor Modal -->
+    <div class="modal fade" id="CreateActorModal" tabindex="-1" aria-labelledby="CreateActorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="CreateActorModalLabel">Create Actor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="{% url 'create' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Name" name="name" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="number" placeholder="Age" name="age" class="sign_input" required>
+                        </div>
+
+                        <button type="submit" class="sign_button" name="addActor">Create</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Create Genre Modal -->
+    <div class="modal fade" id="CreateGenreModal" tabindex="-1" aria-labelledby="CreateGenreModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="CreateGenreModalLabel">Create Actor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="{% url 'create' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Name" name="name" class="sign_input" required>
+                        </div>
+
+                        <button type="submit" class="sign_button" name="addGenre">Create</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Create Movie Modal -->
+    <div class="modal fade" id="CreateMovieModal" tabindex="-1" aria-labelledby="CreateMovieModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="CreateMovieModalLabel">Create Movie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="{% url 'create' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Title" name="title" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <textarea type="text" placeholder="Description" name="description" class="sign_input" required></textarea>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="number" placeholder="Year" name="year" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Country" name="country" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <label>Actors: </label>
+                                <select name="actor" class="sign_input" required multiple>
+                                    {% for actor in actors_list %}
+                                        <option value="{{ actor.id }}">{{ actor.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            <div class="help">Hold down 'Control', or 'Command' on a Mac, to select more than one.</div>
+                        </div>
+
+                        <div class="input_form">
+                            <label>Genres: </label>
+                                <select name="genre" class="sign_input" required multiple>
+                                    {% for genre in genres_list %}
+                                        <option value="{{ genre.id }}">{{ genre.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            <div class="help">Hold down “Control”, or “Command” on a Mac, to select more than one.</div>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="number" placeholder="Rating" name="rating" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="number" placeholder="Age restriction" name="agerestriction" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="file" placeholder="Poster" name="poster" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Film link" name="film_link" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Trailer link" name="trailer_link" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Movie url" name="url" class="sign_input" required>
+                        </div>
+
+                        <button type="submit" class="sign_button" name="addMovie">Create</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Create Genre Modal -->
+    <div class="modal fade" id="CreatePostersModal" tabindex="-1" aria-labelledby="CreatePostersModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-info">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="CreatePostersModalLabel">Create Poster</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="{% url 'create' %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="input_form">
+                            <input type="text" placeholder="Name" name="name" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <label for="id_movie_id">Select Movie: </label>
+                            <select name="movie_id" id="id_movie_id" required>
+                                {% for movie in movies_list %}
+                                    <option value="{{ movie.id }}">{{ movie.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="file" placeholder="Poster" name="poster" class="sign_input" required>
+                        </div>
+
+                        <div class="input_form">
+                            <input type="checkbox" name="switch" class="" id="id_switch" style="appearance: auto" checked>
+                            <label for="id_switch">Switch</label>
+                        </div>
+
+                        <button type="submit" class="sign_button" name="addPoster">Create</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

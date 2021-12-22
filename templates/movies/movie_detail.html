@@ -4,12 +4,12 @@
 {% block content %}
 
         <div class="film_pic mb-5">
-            <img src="{{ poster.img.url }}" alt="foto" class="film_pic_param">
+            <img src="{% if poster_check %} {{ poster }} {% else %} {{ poster.img.url }} {% endif %}" alt="foto" class="film_pic_param">
             <div class="linear_opacity"></div>
             <div class="film_pic_text">
                 <div class="d-flex">
                     <!-- <i class="fas fa-play-circle play_icon text-light "> Trailer </i> -->
-                    <a class="fas fa-play-circle play_icon" data-bs-toggle="modal" data-bs-target="#exampleModal"> Trailer </a>
+                        <a class="fas fa-play-circle play_icon" data-bs-toggle="modal" data-bs-target="#exampleModal"> Trailer </a>
                 </div>
 
 
@@ -38,8 +38,10 @@
 
         <!-- Modal -->
         <div class="modal fade myModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <iframe width="720" height="405" src="{{ movie.trailer_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content myModalContent">
+                    <iframe width="" height="405" src="{{ movie.trailer_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
 

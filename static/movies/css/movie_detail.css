@@ -84,8 +84,8 @@ body{
 }
 
 .linear_opacity{
-    width: 1520px;
-    height: 462px;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2));
     position: absolute;
     top: 0;
@@ -126,6 +126,10 @@ body{
 .myModal{
     align-items: center;
     justify-content: center;
+}
+
+.myModalContent{
+    border: none;
 }
 
 @media (min-width: 576px){

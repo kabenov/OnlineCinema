@@ -68,6 +68,7 @@ class Posters(models.Model):
     img = models.ImageField("Poster", upload_to='carousel_posters/')
     movie = models.ForeignKey(Movie, verbose_name="movie", on_delete=models.CASCADE)
     switch = models.BooleanField(default=True, verbose_name="switch")
+    name = models.CharField("name", max_length=100)
 
     class Meta:
         verbose_name = "Poster"

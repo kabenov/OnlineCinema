@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{ title }}</title>
+    <link rel="shortcut icon" href="{% static 'movies/images/logo.png' %}" type="image/png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'movies/css/home_page.css' %}">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'movies/css/about_teams.css' %} ">
     <link rel="stylesheet" href="{% static 'movies/css/dev_contact.css' %} ">
     <link rel="stylesheet" href="{% static 'movies/css/movie_detail.css' %} ">
+    <link rel="stylesheet" href="{% static 'movies/css/admin_page.css' %} ">
 
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
@@ -50,19 +52,25 @@
 				</form>
 
                 {% if user.is_authenticated %}
-                    <h6>{{ user.username }}  </h6>
-                    <a href="{% url 'log_out' %}" class="headerSign">
-                        Log out
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {% if user.is_superuser %}
+                                <a class="dropdown-item" href="{% url 'admin_panel' %}">Admin Panel</a>
+                            {% endif %}
+                            <a href="{% url 'log_out' %}" class="dropdown-item">
+                                Log out
+                                <i class="fas fa-sign-in-alt" style="color: #ff5860"></i>
+                            </a>
+                        </div>
+                    </div>
                 {% else %}
-
                     <a href="{% url 'sign_in' %}" class="headerSign">
                         Sign in
                         <i class="fas fa-sign-in-alt"></i>
                     </a>
-
                 {% endif %}
 			</div>
 		</div>
@@ -78,7 +86,7 @@
 
 	<!---------------------------------FOOTER------------------------------>
 	<div class="gradient_line"></div>
-	<footer>
+	<footer id="footer">
 		<div class="footer_pad">
 			<div class="container">
 				<div class="footer_lists">
